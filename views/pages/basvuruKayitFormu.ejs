@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("../partials/head"); %>
+  </head>
+
+<body>
+    <header>
+        <%- include("../partials/header"); %>
+    </header>
+        <div class="container" >
+            <div class="row">
+                <div class="col-md-6 offset-md-3 basvuruKayitFormu">
+                    <h2> BAŞVURU KAYIT FORMU </h2>
+                    <form action="/user/postUser" method="POST">
+                        <div class="form-group" >
+                            <label for="name">İsim:</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="surname">Soyisim:</label>
+                            <input type="text" class="form-control" id="surname" name="surname" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phoneNumber">Telefon Numarası:</label>
+                            <input type="number" class="form-control" id="phoneNumber" name="phoneNumber" min="1000000000" max="9999999999" title="Başında sıfır olmadan lütfen 10 basamaklı Telefon numarasi giriniz" placeholder="(5XX) başında sıfır olmadan telefon numarası giriniz" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phoneNumber2">2. Telefon Numarası:</label>
+                            <input type="number" class="form-control" id="phoneNumber2" name="phoneNumber2" min="1000000000" max="9999999999" title="Başında sıfır olmadan lütfen 10 basamaklı Telefon numarasi giriniz" placeholder="(5XX) başında sıfır olmadan ikinci bir iletişim numarası giriniz" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="identificationNumber">Kimlik Numarası:</label>
+                            <input type="number" class="form-control" id="identificationNumber" name="identificationNumber" min="10000000000" max="99999999998" pattern="[0-9]{11}" title="Lütfen 11 basamaklı TC kimlik numarasi giriniz" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Adres:</label>
+                            <input type="text" class="form-control" id="address" name="address" max="150" placeholder="150 karakteri geçmeden adres bilgisi giriniz" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">BAŞVURU YAP</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+       
+    <%- include("../partials/footer"); %>
+
+    <script>
+        const identificationNumberInput = document.getElementById("identificationNumber")
+        const phoneNumberInput = document.getElementById("phoneNumber")
+        const phoneNumber2Input = document.getElementById("phoneNumber2")
+
+        identificationNumberInput.addEventListener("input", function() {
+            let value = parseInt(identificationNumberInput.value)
+            if(this.value.length > 11) {
+                this.value = this.value.slice(0,11)
+            }
+            if(this.value.length < 11){
+                identificationNumberInput.setCustomValidity("11 basamaklı TC Kimlik Numaranizi Giriniz")
+            }else{
+                identificationNumberInput.setCustomValidity("")
+            } 
+            // if(value<10000000000 || value > 99999999998) {
+            //      identificationNumberInput.setCustomValidity(" TC kimlik numarası 11 basamaklı olmalıdır")
+            //      identificationNumberInput.classList.add("error")
+            // }else{
+            //     identificationNumberInput.setCustomValidity("");
+            //     identificationNumberInput.classList.remove("error")
+            // } 
+        })
+
+        phoneNumberInput.addEventListener("input", function() {
+            const value = parseInt(phoneNumberInput.value)
+            if(this.value.length > 10) {
+                this.value = this.value.slice(0,10)
+            }
+            if(this.value.length<10) {
+               phoneNumberInput.setCustomValidity("Telefon numarasi başında sıfır olmadan 10 basamaklı olmalıdır")
+            }else{
+                phoneNumberInput.setCustomValidity("")
+            }
+            // if(value < 1000000000 || value > 9999999999) {
+            //     phoneNumberInput.setCustomValidity("Telefon numarasi başında sıfır olmadan 10 basamaklı olmalıdır")
+            //     phoneNumberInput.classList.add("error"); // Add a CSS class for styling
+            // }else{
+            //     phoneNumberInput.setCustomValidity("")
+            //     phoneNumberInput.classList.remove("error"); // Remove the CSS class
+            // }
+        })
+        phoneNumber2Input.addEventListener("input", function() {
+            const value = parseInt(phoneNumber2Input.value)
+            if(this.value.length > 10) {
+                this.value = this.value.slice(0,10)
+            }
+            if(this.value.length<10) {
+               phoneNumber2Input.setCustomValidity("Telefon numarasi başında sıfır olmadan 10 basamaklı olmalıdır")
+            }else{
+                phoneNumber2Input.setCustomValidity("")
+            }
+            // if(value<1000000000 || value> 9999999999) {
+            //     phoneNumber2Input.setCustomValidity("Telefon numarasi başında sıfır olmadan 10 basamaklı olmalıdır")
+            //     phoneNumber2Input.classList.add("error"); // Add a CSS class for styling
+            // }else{
+            //     phoneNumber2Input.setCustomValidity("")
+            //     phoneNumber2Input.classList.remove("error"); // Remove the CSS class
+            // }
+        })
+    </script>
+</body>
+</html>

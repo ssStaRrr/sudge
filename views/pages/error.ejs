@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("../partials/head"); %>
+</head>
+
+<body>
+    <header>
+        <%- include("../partials/header"); %>
+    </header>
+
+    <div class="alert alert-danger errorAlert" role="alert" >
+
+          <% if(typeof message !== 'undefined') { %>
+            <p> "<%= message %>" </p>
+          <% } %>          
+
+        
+    </div>
+    <%- include("../partials/footer"); %>
+</body>
+
+</html>
